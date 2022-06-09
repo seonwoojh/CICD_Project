@@ -1,0 +1,5 @@
+## ELK NameSpace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: elk-namespace
