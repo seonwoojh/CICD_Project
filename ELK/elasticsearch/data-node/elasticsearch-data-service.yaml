@@ -14,5 +14,5 @@ spec:
   selector:
     app: elasticsearch
     role: data
-  clusterIP: None
+#  clusterIP: None
 ---
