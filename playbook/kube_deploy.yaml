@@ -28,7 +28,6 @@
                     ports:
                       - containerPort: 8080
 
-  tasks:
     - name: Create Deployment
       k8s:
         state: present
