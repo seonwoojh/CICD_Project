@@ -3,10 +3,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: kube-logging
-  name: elasticsearch-client-config
+  name: elasticsearch-data-config
   labels:
     app: elasticsearch
-    role: client
+    role: data
 data:
   elasticsearch.yml: |-
     cluster.name: ${CLUSTER_NAME}
@@ -17,7 +17,7 @@ data:
     node:
       master: false
       data: true
-      ingest: true
+      ingest: false
     xpack.security.enabled: false
     xpack.monitoring.collection.enabled: false
 ---
