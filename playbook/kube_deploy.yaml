@@ -23,7 +23,7 @@
               spec:
                 containers:
                   - name: java-hello-world
-                    image: ddung1203/java-hello-world
+                    image: "ddung1203/java-hello-world:{{ lookup('env', 'BUILD_NUMBER') }}"
                     imagePullPolicy: Always
                     ports:
                       - containerPort: 8080

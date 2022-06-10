@@ -13,5 +13,6 @@
         build:
           path: /home/ubuntu/java-hello-world
         name: ddung1203/java-hello-world
+        tag: "{{ lookup('env', 'BUILD_NUMBER') }}"
         push: yes
         source: build
