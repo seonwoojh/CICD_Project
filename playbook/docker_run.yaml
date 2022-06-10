@@ -1,0 +1,11 @@
+- hosts: docker_host
+  gather_facts: no
+
+  tasks:
+    - docker_container:
+        name: java-hello-world
+        image: ddung1203/java-hello-world
+        state: started
+        recreate: yes
+        ports:
+          - "8080:8080"
