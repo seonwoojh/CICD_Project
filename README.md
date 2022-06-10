@@ -1,1 +1,1 @@
-# source-java-maven-hello-world
+# Joongseok Jeon's CICD_Project
