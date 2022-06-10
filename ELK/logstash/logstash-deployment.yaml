@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: logstash
-  namespace: elk-namespace
+  namespace: kube-logging
 spec:
   replicas: 1 # for test
   selector:
@@ -13,5 +13,43 @@ spec:
       labels:
         app: logstash
 
-    sepc: ## volume
+    spec:
+      volumes:
+        - name: logstash-config-volume
+          configMap:
+            name: logstash-config
+            items:
+              - key: logstash.yml
+                path: logstash.yml
+        - name: logstash-pipeline-volume
+          configMap:
+            name: logstash-config
+            items:
+              - key: logstash.conf
+                path: logstash.conf
+      containers:
+        - name: logstash
+          image: docker.elastic.co/logstash/logstash:7.16.0
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 300m
+              memory: 500M
+          env:
+            - name: LS_JAVA_OPTS
+              value: '-Xmx512m -Xms512m'
+          ports:
+            - name: tcp
+              containerPort: 5000
+              protocol: TCP
+          volumeMounts:
+            - name: logstash-config-volume
+              mountPath: /usr/share/logstash/config
+
+            - name: logstash-pipeline-volume
+              mountPath: /usr/share/logstash/pipeline
+
     
