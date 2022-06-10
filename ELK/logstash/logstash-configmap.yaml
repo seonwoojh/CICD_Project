@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lostash-config
+data:
+  # logstash conf
+  logstash.yaml: |
+    http.host: "0.0.0.0"
+    path.config: /usr/share/logstash/xxx
+
+# logstash pipeline
+  logstash.conf: |
+    input {
+      tcp {
+        port => 5000 # jenkins port
+        }
+    }
+
+    filter {
+      mutate {
+        }
+    }
+
+    output {
+        stdout { codec => rubydebug}
+
+        elasticsearch {
+          hosts => ""
+          index => ""
+          }
+        }
+
