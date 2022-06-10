@@ -16,7 +16,7 @@ data:
     network.host: 0.0.0.0
     node:
       master: false
-      data: true
+      data: false
       ingest: true
     xpack.security.enabled: false
     xpack.monitoring.collection.enabled: false
