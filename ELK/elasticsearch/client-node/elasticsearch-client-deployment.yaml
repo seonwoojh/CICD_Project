@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: kube-logging
+  namespace: ELK
   name: elasticsearch-client
   labels:
     app: elasticsearch
@@ -19,6 +19,8 @@ spec:
         app: elasticsearch
         role: client
     spec:
+      nodeSelector:
+        Client: Node
       containers:
       - name: elasticsearch-client
         image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0

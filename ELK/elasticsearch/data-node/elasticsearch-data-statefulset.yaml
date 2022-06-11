@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: kube-logging
+  namespace: ELK
   name: elasticsearch-data
   labels:
     app: elasticsearch
@@ -20,6 +20,8 @@ spec:
         app: elasticsearch-data
         role: data
     spec:
+      nodeSelector:
+        Data: Node 
       containers:
       - name: elasticsearch-data
         image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0
