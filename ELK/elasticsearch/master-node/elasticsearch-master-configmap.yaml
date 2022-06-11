@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: ELK
+  namespace: elk
   name: elasticsearch-master-config
   labels:
     app: elasticsearch
