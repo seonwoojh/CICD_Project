@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: logstash
-  namespace: ELK
+  namespace: elk
 spec:
   replicas: 1 # for test
   selector:
@@ -31,15 +31,15 @@ spec:
                 path: logstash.conf
       containers:
         - name: logstash
-          image: docker.elastic.co/logstash/logstash:7.16.0
+          image: docker.elastic.co/logstash/logstash:7.10.2
           imagePullPolicy: Always
           resources:
             limits:
-              cpu: 500m
-              memory: 1Gi
+              cpu: 2000m
+              memory: 2Gi
             requests:
-              cpu: 300m
-              memory: 500M
+              cpu: 1500m
+              memory: 1.5G
           env:
             - name: LS_JAVA_OPTS
               value: '-Xmx512m -Xms512m'

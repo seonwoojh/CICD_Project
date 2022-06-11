@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: ELK
+  namespace: elk
   name: elasticsearch-data
   labels:
     app: elasticsearch
@@ -24,7 +24,7 @@ spec:
         Data: Node 
       containers:
       - name: elasticsearch-data
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
         env:
         - name: CLUSTER_NAME
           value: elasticsearch
@@ -35,7 +35,7 @@ spec:
         - name: MASTER_NODES
           value: elasticsearch-master
         - name: "ES_JAVA_OPTS"
-          value: "-Xms300m -Xmx300m"
+          value: "-Xms500m -Xmx500m"
         ports:
         - containerPort: 9300
           name: transport
