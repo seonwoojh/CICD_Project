@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: logstash
-  namespace: kube-logging
+  namespace: ELK
 spec:
   replicas: 1 # for test
   selector:
@@ -14,6 +14,8 @@ spec:
         app: logstash
 
     spec:
+      nodeSelector:
+        Name: logstash
       volumes:
         - name: logstash-config-volume
           configMap:

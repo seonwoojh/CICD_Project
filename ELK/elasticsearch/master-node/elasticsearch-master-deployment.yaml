@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: kube-logging
+  namespace: ELK
   name: elasticsearch-master
   labels:
     app: elasticsearch
@@ -19,6 +19,8 @@ spec:
         app: elasticsearch
         role: master
     spec:
+      nodeSelector:
+        Master: Node 
       containers:
       - name: elasticsearch-master
         image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0

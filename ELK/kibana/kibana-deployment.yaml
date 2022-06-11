@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: kube-logging
+  namespace: ELK
   name: kibana
   labels:
     app: kibana
@@ -16,6 +16,8 @@ spec:
       labels:
         app: kibana
     spec:
+      nodeSelector:
+        Name: Kibana
       containers:
       - name: kibana
         image: docker.elastic.co/kibana/kibana:7.16.0
