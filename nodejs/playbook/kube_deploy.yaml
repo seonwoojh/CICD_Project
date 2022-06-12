@@ -29,10 +29,10 @@
                       - containerPort: 3000
                     resources:
                       requests:
-                        cpu: 800m
+                        cpu: 1000m
                         memory: 2000M
                       limits:
-                        cpu: 800m
+                        cpu: 1000m
                         memory: 2000M
 
     - name: Create Deployment
@@ -62,10 +62,10 @@
                       - containerPort: 3000
                     resources:
                       requests:
-                        cpu: 800m
+                        cpu: 1000m
                         memory: 2000M
                       limits:
-                        cpu: 800m
+                        cpu: 1000m
                         memory: 2000M
 
     - name: Create Service
