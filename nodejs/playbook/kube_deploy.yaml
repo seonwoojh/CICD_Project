@@ -32,7 +32,7 @@
                         cpu: 100m
                         memory: 300M
                       limits:
-                        cpu: 250m
+                        cpu: 200m
                         memory: 500M
 
     - name: Create Deployment
@@ -65,7 +65,7 @@
                         cpu: 100m
                         memory: 300M
                       limits:
-                        cpu: 250m
+                        cpu: 200m
                         memory: 500M
 
     - name: Create Service
