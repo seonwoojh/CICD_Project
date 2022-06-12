@@ -21,35 +21,14 @@ data:
     filter {
       if [message] =~ "ciUrl" {
         mutate {
-          split => [ "message", "," ]
           gsub => ["message", "[\"/{}]", ""]
-          # gsub => ["message", "/(?<=:)[a-z\s!]+/", ""]
-
-          add_field => {
-            # "ciUrl" => "%{[message][0]}"
-            # "jobName" => "%{[message][1](?<=:)[a-z\s!]+}"
-            # "fullJobName" => "%{[message][2]}"
-            # "number" => "%{[message][3]}"
-            # "slaveInfo" => "%{[message][4]}"
-            # "executor" => "%{[message][5]}"
-            # "label" => "%{[message][6]}"
-            # "startTime" => "%{[message][7]}"
-            # "endTime" => "%{[message][8]}"``
-            # "startedUserId" => "%{[message][9]}"
-            # "startedUserName" => "%{[message][10]}"
-            # "result" => "%{[message][11]}"
-            # "duration" => "%{[message][12]}"
-            # "parameters" => "%{[message][13]}"
-            # "scmInfo" => "%{[message][14]}"
-            # "branch" => "%{[message][15]}"
-            # "commit" => (?<%{[message][16]}>^[a-z0-9_-]{2,10}$)
-            # "queueTime" => "%{[message][17]}"
-            # "buildUrl" => "%{[message][18]}"
-            # "contextId" => "%{[message][19]}"
-            # "buildCause" => "%{[message][20]}"
-            # "buildFailureCauses" => "%{[message][21]}"
-          }
-          # remove_field => [ "port","@version","host","message" ] # mutate end
+        }
+        kv {
+          field_split => ","
+          value_split => ":"
+        }
+        mutate {
+          remove_field => [ "port","@version","host","message" ] # mutate end
         }
       }
       else {
