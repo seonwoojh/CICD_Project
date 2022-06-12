@@ -26,7 +26,7 @@
                     image: "ddung1203/node-js:{{ lookup('env', 'BUILD_NUMBER') }}"
                     imagePullPolicy: Always
                     ports:
-                      - containerPort: 8080
+                      - containerPort: 3000
 
     - name: Create Deployment
       k8s:
@@ -52,7 +52,7 @@
                     image: "ddung1203/node-js:{{ lookup('env', 'BUILD_NUMBER') }}"
                     imagePullPolicy: Always
                     ports:
-                      - containerPort: 8080
+                      - containerPort: 3000
     - name: Create Service
       k8s:
         state: present
@@ -72,4 +72,4 @@
               app: node-js 
             ports:
               - port: 80
-                targetPort: 8080
+                targetPort: 3000
