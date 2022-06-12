@@ -29,11 +29,11 @@
                       - containerPort: 3000
                     resources:
                       requests:
-                        cpu: 1500m
-                        memory: 2000M
+                        cpu: 1000m
+                        memory: 3000M
                       limits:
-                        cpu: 1500m
-                        memory: 2000M
+                        cpu: 1000m
+                        memory: 3000M
 
     - name: Create Deployment
       k8s:
@@ -62,11 +62,11 @@
                       - containerPort: 3000
                     resources:
                       requests:
-                        cpu: 1500m
-                        memory: 2000M
+                        cpu: 1000m
+                        memory: 3000M
                       limits:
-                        cpu: 1500m
-                        memory: 2000M
+                        cpu: 1000m
+                        memory: 3000M
 
     - name: Create Service
       k8s:
