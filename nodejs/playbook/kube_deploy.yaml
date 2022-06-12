@@ -30,6 +30,9 @@
                     resources:
                       requests:
                         cpu: 100m
+                        memory: 300M
+                      limits:
+                        cpu: 250m
                         memory: 500M
 
     - name: Create Deployment
@@ -60,6 +63,9 @@
                     resources:
                       requests:
                         cpu: 100m
+                        memory: 300M
+                      limits:
+                        cpu: 250m
                         memory: 500M
 
     - name: Create Service
