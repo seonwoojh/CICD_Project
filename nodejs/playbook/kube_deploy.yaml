@@ -30,10 +30,10 @@
                     resources:
                       requests:
                         cpu: 1500m
-                        memory: 3000M
+                        memory: 2000M
                       limits:
                         cpu: 1500m
-                        memory: 3000M
+                        memory: 2000M
 
     - name: Create Deployment
       k8s:
@@ -63,10 +63,10 @@
                     resources:
                       requests:
                         cpu: 1500m
-                        memory: 3000M
+                        memory: 2000M
                       limits:
                         cpu: 1500m
-                        memory: 3000M
+                        memory: 2000M
 
     - name: Create Service
       k8s:
