@@ -89,6 +89,36 @@
               - port: 80
                 targetPort: 3000
 
-    - command: kubectl delete horizontalpodautoscaler.autoscaling/node-js
+    - name: Destroy HPA Autoscaler
+      k8s:
+        state: absent
+        definition:
+          apiVersion: autoscaling/v1
+          kind: HorizontalPodAutoscaler
+          metadata:
+            name: node-js
+          spec:
+            scaleTargetRef:
+              apiVersion: apps/v1
+              kind: Deployment
+              name: node-js
+            minReplicas: 1
+            maxReplicas: 20
+            targetCPUUtilizationPercentage: 50
 
-    - command: kubectl autoscale deployment node-js --cpu-percent=50 --min=2 --max=20
+    - name: Create HPA Autoscaler
+      k8s:
+        state: absent
+        definition:
+          apiVersion: autoscaling/v1
+          kind: HorizontalPodAutoscaler
+          metadata:
+            name: node-js
+          spec:
+            scaleTargetRef:
+              apiVersion: apps/v1
+              kind: Deployment
+              name: node-js
+            minReplicas: 1
+            maxReplicas: 20
+            targetCPUUtilizationPercentage: 50
