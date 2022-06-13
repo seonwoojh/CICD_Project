@@ -84,7 +84,7 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
   await Tour.findOneAndRemove({_id: req.params.id});
   req.flash('success', 'Successfully deleted');
   res.redirect('/tours');
-}));
+
   const mimetypes = {
     "image/jpeg": "jpg",
     "image/gif": "gif",
@@ -100,6 +100,7 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
       cb(null, true);
     }
   });
+}));
 router.post('/', needAuth, upload.single('img'), catchErrors(async (req, res, next) => {//몽고에서 고유의 아이디를 주기에......
   const user = req.user;
   var tour = new Tour({
