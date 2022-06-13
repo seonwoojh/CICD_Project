@@ -89,38 +89,4 @@
               - port: 80
                 targetPort: 3000
 
-    - name: Deploy HPA
-      k8s:
-        state: absent
-        definition:
-        ignore_errors: yes
-          apiVersion: autoscaling/v1
-          kind: HorizontalPodAutoscaler
-          metadata:
-            name: node-js
-          spec:
-            scaleTargetRef:
-              apiVersion: apps/v1
-              kind: Deployment
-              name: node-js
-            minReplicas: 1
-            maxReplicas: 10
-            targetCPUUtilizationPercentage: 50
-
-    - name: Create HPA
-      k8s:
-        state: present
-        definition:
-        ignore_errors: yes
-          apiVersion: autoscaling/v1
-          kind: HorizontalPodAutoscaler
-          metadata:
-            name: node-js
-          spec:
-            scaleTargetRef:
-              apiVersion: apps/v1
-              kind: Deployment
-              name: node-js
-            minReplicas: 1
-            maxReplicas: 10
-            targetCPUUtilizationPercentage: 50
+    - command: kubectl create -f hpa.yaml
