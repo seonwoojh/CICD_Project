@@ -89,4 +89,4 @@
               - port: 80
                 targetPort: 3000
 
-    - command: kubectl apply -f /home/ubuntu/nodejs/vpa.yaml
+    - command: kubectl apply -f /home/ubuntu/nodejs/hpa.yaml
