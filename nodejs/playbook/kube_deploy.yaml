@@ -92,7 +92,8 @@
     - name: Deploy HPA
       k8s:
         state: absent
-        definition:   
+        definition:
+        ignore_errors: yes
           apiVersion: autoscaling/v1
           kind: HorizontalPodAutoscaler
           metadata:
@@ -110,6 +111,7 @@
       k8s:
         state: present
         definition:
+        ignore_errors: yes
           apiVersion: autoscaling/v1
           kind: HorizontalPodAutoscaler
           metadata:
