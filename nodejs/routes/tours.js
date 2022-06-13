@@ -95,31 +95,32 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
     fileFilter: (req, file, cb) => {
       var ext = mimetypes[file.mimetype];
       if (!ext) {
-        return cb(new Error('Only image files are allowed!'), false)
+        return cb(new Error('Only image files are allowed!'), false);
       }
       cb(null, true);
     }
   });
-router.post('/', needAuth, upload.single('img'), catchErrors(async (req, res, next) => {//몽고에서 고유의 아이디를 주기에......
-  const user = req.user;
-  var tour = new Tour({
-    title: req.body.title,
-    author: user._id,
-    content: req.body.content,
-    price: req.body.price,
-    tags: req.body.tags.split(" ").map(e => e.trim()),
-  });
-  if (req.file) {
-    const dest = path.join(__dirname, '../public/images/uploads/');
-    console.log("File ->", req.file);
-    const filename = req.file.filename + "." + mimetypes[req.file.mimetype];
-    await fs.move(req.file.path, dest + filename);
-    tour.img = "/images/uploads/" + filename;
-  }
-  await tour.save();
-  req.flash('success', 'Successfully posted');
-  res.redirect('/tours');
-}));
+	router.post('/', needAuth, upload.single('img'), catchErrors(async (req, res, next) => {//몽고에서 고유의 아이디를 주기에......
+  	const user = req.user;
+  	var tour = new Tour({
+  	  title: req.body.title,
+  	  author: user._id,
+  	  content: req.body.content,
+  	  price: req.body.price,
+  	  tags: req.body.tags.split(" ").map(e => e.trim()),
+			img: req.body.img,
+  	});
+  	if (req.file) {
+  	  const dest = path.join(__dirname, 'https://realmytrip.s3.amazonaws.com/');
+  	  console.log("File ->", req.file);
+  	  const filename = req.file.filename + "." + mimetypes[req.file.mimetype];
+  	  await fs.move(req.file.path, dest + filename);
+  	  tour.img = "https://realmytrip.s3.amazonaws.com/" + filename;
+  	}
+  	await tour.save();
+  	req.flash('success', 'Successfully posted');
+  	res.redirect('/tours');
+	}));
 
 router.post('/:id/reviews', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
