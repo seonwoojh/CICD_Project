@@ -9,24 +9,31 @@
           apiVersion: apps/v1
           kind: Deployment
           metadata:
-            name: java-hello-world
+            name: node-js
             namespace: default
           spec:
             replicas: 3
             selector:
               matchLabels:
-                app: java-hello-world
+                app: node-js
             template:
               metadata:
                 labels:
-                  app: java-hello-world
+                  app: node-js
               spec:
                 containers:
-                  - name: java-hello-world
-                    image: "ddung1203/java-hello-world:{{ lookup('env', 'BUILD_NUMBER') }}"
+                  - name: node-js
+                    image: "ddung1203/node-js:{{ lookup('env', 'BUILD_NUMBER') }}"
                     imagePullPolicy: Always
                     ports:
-                      - containerPort: 8080
+                      - containerPort: 3000
+                    resources:
+                      requests:
+                        cpu: 100m
+                        memory: 300M
+                      limits:
+                        cpu: 200m
+                        memory: 500M
 
     - name: Create Deployment
       k8s:
@@ -35,24 +42,32 @@
           apiVersion: apps/v1
           kind: Deployment
           metadata:
-            name: java-hello-world
+            name: node-js
             namespace: default
           spec:
             replicas: 2
             selector:
               matchLabels:
-                app: java-hello-world
+                app: node-js
             template:
               metadata:
                 labels:
-                  app: java-hello-world
+                  app: node-js
               spec:
                 containers:
-                  - name: java-hello-world
-                    image: "ddung1203/java-hello-world:{{ lookup('env', 'BUILD_NUMBER') }}"
+                  - name: node-js
+                    image: "ddung1203/node-js:{{ lookup('env', 'BUILD_NUMBER') }}"
                     imagePullPolicy: Always
                     ports:
-                      - containerPort: 8080
+                      - containerPort: 3000
+                    resources:
+                      requests:
+                        cpu: 100m
+                        memory: 300M
+                      limits:
+                        cpu: 200m
+                        memory: 500M
+
     - name: Create Service
       k8s:
         state: present
@@ -60,7 +75,7 @@
           apiVersion: v1
           kind: Service
           metadata:
-            name: java-hello-lb
+            name: node-js-lb
             namespace: default
             annotations:
              service.beta.kubernetes.io/aws-load-balancer-type: "external"
@@ -69,7 +84,9 @@
           spec:
             type: LoadBalancer
             selector:
-              app: java-hello-world
+              app: node-js
             ports:
               - port: 80
-                targetPort: 8080
+                targetPort: 3000
+
+    - command: kubectl apply -f /home/ubuntu/nodejs/hpa.yaml
