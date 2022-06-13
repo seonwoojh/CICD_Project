@@ -89,4 +89,7 @@
               - port: 80
                 targetPort: 3000
 
+
+    - command: kubectl delete horizontalpodautoscaler.autoscaling/node-js
+
     - command: kubectl autoscale deployment node-js --cpu-percent=50 --min=2 --max=20
