@@ -28,12 +28,23 @@ data:
           value_split => ":"
         }
         mutate {
-          remove_field => [ "port","@version","host","message" ] # mutate end
-        }
+          remove_field => [ "port","@version","host","message" ]
+        } # mutate end
       }
       else {
         drop{}
       }
+
+        mutate {
+          convert => {
+            "duration" => "integer"
+            "executor" => "integer"
+            "queueTime" => "integer"
+            "startTime" => "integer"
+            "number" => "integer"
+            "endTime" => "integer"
+          }
+         }
     }
 
     output {
