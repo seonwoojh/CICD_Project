@@ -112,11 +112,11 @@ router.post('/', needAuth, upload.single('img'), catchErrors(async (req, res, ne
 		img: req.body.img,
   });
   if (req.file) {
-    const dest = path.join(__dirname, '../public/images/uploads/');
+    const dest = path.join(__dirname, 'https://realmytrip.s3.amazonaws.com/');
     console.log("File ->", req.file);
     const filename = req.file.filename + "." + mimetypes[req.file.mimetype];
     await fs.move(req.file.path, dest + filename);
-    tour.img = "/images/uploads/" + filename;
+    tour.img = "https://realmytrip.s3.amazonaws.com/" + filename;
   }
   await tour.save();
   req.flash('success', 'Successfully posted');
