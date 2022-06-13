@@ -108,7 +108,7 @@
 
     - name: Create HPA Autoscaler
       k8s:
-        state: absent
+        state: present
         definition:
           apiVersion: autoscaling/v1
           kind: HorizontalPodAutoscaler
