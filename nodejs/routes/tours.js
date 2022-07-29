@@ -63,14 +63,15 @@ router.get('/:id', catchErrors(async (req, res, next) => {
 
 router.post('/:id', catchErrors(async (req, res, next) => {
   const tour = await Tour.findById(req.params.id);
-
+	const user = req.user;
+	
   if (!tour) {
     req.flash('danger', 'Not exist tour');
     return res.redirect('back');
   }
   tour.title = req.body.title;
   tour.content = req.body.content;
-  tour.author = req.body.author;
+  tour.author = user._id;
   tour.price = req.body.price;
   tour.tags = req.body.tags.split(" ").map(e => e.trim());
 

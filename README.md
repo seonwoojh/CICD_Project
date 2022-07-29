@@ -1,1 +1,1 @@
-# Joongseok Jeon's CICD_Project
+# Team 3's CICD_Project
